@@ -12,4 +12,10 @@ import java.sql.Timestamp;
 @Table(name = "curvepoint")
 public class CurvePoint {
     // TODO: Map columns in data table CURVEPOINT with corresponding java fields
+    Integer id;
+    Integer curveId;
+    Timestamp asOfDate;
+    Double term;
+    Double value;
+    Timestamp creationDate;
 }

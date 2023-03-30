@@ -9,4 +9,9 @@ import java.sql.Timestamp;
 @Table(name = "rating")
 public class Rating {
     // TODO: Map columns in data table RATING with corresponding java fields
+    Integer id;
+    String moodysRating;
+    String sandPRating;
+    String fitchRating;
+    Integer orderNumber;
 }
