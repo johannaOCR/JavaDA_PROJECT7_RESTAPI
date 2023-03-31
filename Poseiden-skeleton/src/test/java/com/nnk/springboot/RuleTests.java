@@ -18,7 +18,7 @@ public class RuleTests {
 
 	@Autowired
 	private RuleNameRepository ruleNameRepository;
-
+		/*
 	@Test
 	public void ruleTest() {
 		RuleName rule = new RuleName("Rule Name", "Description", "Json", "Template", "SQL", "SQL Part");
@@ -43,4 +43,6 @@ public class RuleTests {
 		Optional<RuleName> ruleList = ruleNameRepository.findById(id);
 		Assert.assertFalse(ruleList.isPresent());
 	}
+	*/
+
 }

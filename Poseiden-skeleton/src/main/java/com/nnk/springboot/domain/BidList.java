@@ -2,6 +2,7 @@ package com.nnk.springboot.domain;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import javax.persistence.Id;
 
 @Entity
 @Table(name = "bidlist")
@@ -11,24 +12,24 @@ public class BidList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BidListId", nullable = false)
     private Integer BidListId;
-    
+
     @Column(name = "account")
     private String account;
-    
+
     @Column(name = "type")
     private String type;
 
     @Column(name = "bidQuantity")
-    private double bidQuantity;
+    private Double bidQuantity;
 
     @Column(name = "askQuantity")
-    private double askQuantity;
+    private Double askQuantity;
 
     @Column(name = "bid")
-    private double bid;
+    private Double bid;
 
     @Column(name = "ask")
-    private double ask;
+    private Double ask;
 
     @Column(name = "benchmark")
     private String benchmark;
@@ -52,9 +53,15 @@ public class BidList {
     private String book;
 
     @Column(name = "creationName")
-    private String revisionName;
+    private String creationName;
 
     @Column(name = "creationDate")
+    private Timestamp creationDate;
+
+    @Column(name = "revisionName")
+    private String revisionName;
+
+    @Column(name = "revisionDate")
     private Timestamp revisionDate;
 
     @Column(name = "dealName")
@@ -69,14 +76,38 @@ public class BidList {
     @Column(name = "side")
     private String side;
 
-    public BidList(String account, String type, double bidQuantity) {
+    public BidList(String account, String type, Double bidQuantity, Double askQuantity, Double bid, Double ask, String benchmark, Timestamp bidListDate, String commentary, String security, String status, String trader, String book, String creationName, Timestamp creationDate, String revisionName, Timestamp revisionDate, String dealName, String dealType, String sourceListId, String side) {
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
+        this.askQuantity = askQuantity;
+        this.bid = bid;
+        this.ask = ask;
+        this.benchmark = benchmark;
+        this.bidListDate = bidListDate;
+        this.commentary = commentary;
+        this.security = security;
+        this.status = status;
+        this.trader = trader;
+        this.book = book;
+        this.creationName = creationName;
+        this.creationDate = creationDate;
+        this.revisionName = revisionName;
+        this.revisionDate = revisionDate;
+        this.dealName = dealName;
+        this.dealType = dealType;
+        this.sourceListId = sourceListId;
+        this.side = side;
+    }
+
+    public BidList(String account, String type, Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;
     }
 
     public BidList() {
-        
+
     }
 
     public Integer getBidListId() {
@@ -103,35 +134,35 @@ public class BidList {
         this.type = type;
     }
 
-    public double getBidQuantity() {
+    public Double getBidQuantity() {
         return bidQuantity;
     }
 
-    public void setBidQuantity(double bidQuantity) {
+    public void setBidQuantity(Double bidQuantity) {
         this.bidQuantity = bidQuantity;
     }
 
-    public double getAskQuantity() {
+    public Double getAskQuantity() {
         return askQuantity;
     }
 
-    public void setAskQuantity(double askQuantity) {
+    public void setAskQuantity(Double askQuantity) {
         this.askQuantity = askQuantity;
     }
 
-    public double getBid() {
+    public Double getBid() {
         return bid;
     }
 
-    public void setBid(double bid) {
+    public void setBid(Double bid) {
         this.bid = bid;
     }
 
-    public double getAsk() {
+    public Double getAsk() {
         return ask;
     }
 
-    public void setAsk(double ask) {
+    public void setAsk(Double ask) {
         this.ask = ask;
     }
 
@@ -189,6 +220,22 @@ public class BidList {
 
     public void setBook(String book) {
         this.book = book;
+    }
+
+    public String getCreationName() {
+        return creationName;
+    }
+
+    public void setCreationName(String creationName) {
+        this.creationName = creationName;
+    }
+
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Timestamp creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getRevisionName() {
