@@ -10,53 +10,30 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
+@DataJpaTest
 @SpringBootTest
 public class BidServiceTest {
+
 	private static final Logger logger = LogManager.getLogger("BidListServiceTest");
+
 	@Mock
 	private BidListRepository bidListRepository;
 
 	@InjectMocks
 	private BidListService bidListService;
-/*
-	@Test
-	public void bidListTest() {
-		BidList bid = new BidList("Account Test", "Type Test", 10d);
-
-		// Save
-		bid = bidListRepository.save(bid);
-	Assert.assertNotNull(bid.getBidListId());
-		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
-
-		// Update
-		bid.setBidQuantity(20d);
-		bid = bidListRepository.save(bid);
-		Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
-
-		// Find
-		List<BidList> listResult = bidListRepository.findAll();
-		Assert.assertTrue(listResult.size() > 0);
-
-		// Delete
-		Integer id = bid.getBidListId();
-		bidListRepository.delete(bid);
-		Optional<BidList> bidList = bidListRepository.findById(id);
-		Assert.assertFalse(bidList.isPresent());
-	}
-	*/
 
 	@Test
-	public void bidListTestSave(){
+	public void bidListSaveTest(){
 		// GIVEN
 		BidList bid = new BidList("Account Test", "Type Test", 10d);
 
@@ -67,7 +44,55 @@ public class BidServiceTest {
 		// THEN
 		Assert.assertNotNull(bid);
 		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
+	}
+	@Test
+	public void bidListUpdateTest(){
+		// GIVEN
+		BidList bid = new BidList("Account Test", "Type Test", 10d);
+		Optional<BidList> bidListOptional = java.util.Optional.of(new BidList("Account Test", "Type Test", 10d));
 
+		// WHEN
+		when(bidListRepository.findById(anyInt())).thenReturn(bidListOptional);
+		bid.setAccount("changement account");
+		boolean response = bidListService.updateBidList(1,bid);
 
+		// THEN
+		Assert.assertTrue(response);
+		verify(bidListRepository,times(1)).save(any());
+	}
+	@Test
+	public void bidListFindAllTest(){
+		// WHEN
+		bidListService.getAllBidList();
+		// THEN
+		verify(bidListRepository,times(1)).findAll();
+	}
+
+	@Test
+	public void bidListFindByIdTest(){
+		// GIVEN
+		BidList bid = new BidList("Account Test", "Type Test", 10d);
+		bid.setId(1);
+		Optional<BidList> bidListOptional = java.util.Optional.of(new BidList("Account Test", "Type Test", 10d));
+
+		// WHEN
+		when(bidListRepository.findById(anyInt())).thenReturn(bidListOptional);
+		BidList result = bidListService.getBidListById(1);
+		// THEN
+		Assert.assertNotNull(result);
+	}
+
+	@Test
+	public void bidListDeleteTest(){
+		// GIVEN
+		BidList bid = new BidList("Account Test", "Type Test", 10d);
+
+		// WHEN
+		when(bidListRepository.findById(anyInt())).thenReturn(java.util.Optional.of(bid));
+		boolean response = bidListService.deleteBidList(1);
+
+		// THEN
+		Assert.assertTrue(response);
+		verify(bidListRepository,times(1)).deleteById(1);
 	}
 }

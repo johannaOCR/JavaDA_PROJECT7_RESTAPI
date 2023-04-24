@@ -1,56 +1,66 @@
 package com.nnk.springboot.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 
 @Entity
-@Table(name = "trade")
+@Getter
+@Setter
+@ToString
+@Table(name= "trade")
 public class Trade {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "TradeId", nullable = false)
-    Integer tradeId;
-    @Column(name = "account")
-    String account;
-    @Column(name = "type")
-    String type;
-    @Column(name = "buyQuantity")
-    Double buyQuantity;
-    @Column(name = "sellQuantity")
-    Double sellQuantity;
-    @Column(name = "buyPrice")
-    Double buyPrice;
-    @Column(name = "sellPrice")
-    Double sellPrice;
-    @Column(name = "benchmark")
-    String benchmark;
-    @Column(name = "tradeDate")
-    Timestamp tradeDate;
-    @Column(name = "security")
-    String security;
-    @Column(name = "status")
-    String status;
-    @Column(name = "trader")
-    String trader;
-    @Column(name = "book")
-    String book;
-    @Column(name = "creationName")
-    String creationName;
-    @Column(name = "creationDate")
-    Timestamp creationDate;
-    @Column(name = "revisionName")
-    String revisionName;
-    @Column(name = "revisionDate")
-    Timestamp revisionDate;
-    @Column(name = "dealName")
-    String dealName;
-    @Column(name = "dealType")
-    String dealType;
-    @Column(name = "sourceListId")
-    String sourceListId;
-    @Column(name = "side")
-    String side;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer id;
+    @NotNull
+    @NotBlank(message = "Account is mandatory")
+    private String account;
+    @NotNull
+    @NotBlank(message = "Type is mandatory")
+    private String type;
+    private Double buyQuantity;
+    private Double sellQuantity;
+    private Double buyPrice;
+    private Double sellPrice;
+    private String benchmark;
+    private Timestamp tradeDate;
+    private String security;
+    private String status;
+    private String trader;
+    private String book;
+    private String creationName;
+    private Timestamp creationDate;
+    private String revisionName;
+    private Timestamp revisionDate;
+    private String dealName;
+    private String dealType;
+    private String sourceListId;
+    private String side;
+
+    public Trade() {
+    }
+
+    public Trade(String account, String type) {
+        this.account = account;
+        this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Trade trade = (Trade) o;
+        return id != null && Objects.equals(id, trade.id);
+    }
 
 }

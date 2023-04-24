@@ -33,7 +33,7 @@ public class BidListService {
 
     public boolean updateBidList(int id,BidList bidList){
         BidList bidListFind = getBidListById(id);
-        bidList.setBidListId(id);
+        bidList.setId(id);
 
         if(bidListFind!=bidList){
             logger.info("Updating bidList");
