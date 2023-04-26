@@ -8,10 +8,14 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -35,6 +39,18 @@ public class BidControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("bidList/add"))
                 .andExpect(model().attributeExists("bidList"));
+    }
+
+    @Test
+    public void validate() throws Exception {
+        //WHEN
+        mockMvc.perform(post("/bidList/validate").with(csrf())
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                        .content("account=account&type=type&bidQuantity=10.0")
+                        .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                //THEN
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/bidList/list"));
     }
     
 }
