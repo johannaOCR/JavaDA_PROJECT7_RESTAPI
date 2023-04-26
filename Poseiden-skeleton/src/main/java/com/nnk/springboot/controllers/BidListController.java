@@ -20,31 +20,65 @@ public class BidListController {
     @Autowired
     BidListService bidListService;
 
+    /**
+     * Affiche la liste des bidlists enregistrées
+     * @param model
+     * @return
+     */
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
         List<BidList> bidListList = bidListService.getAllBidList();
-        //TODO : map with the view
+        model.addAttribute("bidListList", bidListList);
         return "bidList/list";
     }
 
+    /**
+     * affiche le formulaire pour ajouter une Bidlist
+     * @param bid
+     * @return
+     */
     @GetMapping("/bidList/add")
     public String addBidForm(BidList bid) {
         return "bidList/add";
     }
 
+    /**
+     * Valide les données du formulaire et enregistre si OK
+     * @param bid
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping("/bidList/validate")
     public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
+        if (!result.hasErrors()) {
+            bidListService.addBidList(bid);
+            return "redirect:/bidList/list";
+        }
         return "bidList/add";
     }
 
+    /**
+     * Affiche le formulaire pour mettre à jour la Bidlist
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         // TODO: get Bid by Id and to model then show to the form
         return "bidList/update";
     }
 
+    /**
+     * Valide et effectue les modifications demandé du formulaire
+     * @param id
+     * @param bidList
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                              BindingResult result, Model model) {
@@ -52,6 +86,12 @@ public class BidListController {
         return "redirect:/bidList/list";
     }
 
+    /**
+     * Supprime une bidList donnée
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         bidListService.deleteBidList(id);
