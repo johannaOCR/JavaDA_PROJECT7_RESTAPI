@@ -32,7 +32,7 @@ public class BidControllerTest {
 
 
     @Test
-    public void addBidForm() throws Exception {
+    public void addBidFormTest() throws Exception {
         //WHEN
         mockMvc.perform(get("/bidList/add"))
                 //THEN
@@ -42,7 +42,7 @@ public class BidControllerTest {
     }
 
     @Test
-    public void validate() throws Exception {
+    public void validateTest() throws Exception {
         //WHEN
         mockMvc.perform(post("/bidList/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
@@ -52,5 +52,13 @@ public class BidControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bidList/list"));
     }
-    
+    @Test
+    public void homeTest() throws Exception {
+        //WHEN
+        mockMvc.perform(get("/bidList/list"))
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(view().name("bidList/list"))
+                .andExpect(model().attributeExists("bidList"));
+    }
 }

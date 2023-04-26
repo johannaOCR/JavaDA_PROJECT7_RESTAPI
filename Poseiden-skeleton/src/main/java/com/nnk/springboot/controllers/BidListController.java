@@ -28,8 +28,8 @@ public class BidListController {
     @RequestMapping("/bidList/list")
     public String home(Model model)
     {
-        List<BidList> bidListList = bidListService.getAllBidList();
-        model.addAttribute("bidListList", bidListList);
+        List<BidList> bidList = bidListService.getAllBidList();
+        model.addAttribute("bidList", bidList);
         return "bidList/list";
     }
 
