@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -67,8 +68,12 @@ public class BidListController {
      */
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
-        return "bidList/update";
+        BidList bid = bidListService.getBidListById(id);
+        if (bid!=null) {
+            model.addAttribute("bid", bid);
+            return "bidList/update";
+        }
+        return "bidList/list";
     }
 
     /**

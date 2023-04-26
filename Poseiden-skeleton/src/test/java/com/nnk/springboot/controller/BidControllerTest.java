@@ -1,6 +1,7 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.controllers.BidListController;
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.services.BidListService;
 
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.security.test.context.support.WithMockUser;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -61,4 +63,17 @@ public class BidControllerTest {
                 .andExpect(view().name("bidList/list"))
                 .andExpect(model().attributeExists("bidList"));
     }
+    @Test
+    public void showUpdateForm() throws Exception {
+        //GIVEN
+        BidList bidList = new BidList("account", "type", 10d);
+        //WHEN
+        when(bidListService.getBidListById(1)).thenReturn(bidList);
+        mockMvc.perform(get("/bidList/update/1").with(csrf()))
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(view().name("bidList/update"))
+                .andExpect(model().attributeExists("bid"));
+    }
+
 }
