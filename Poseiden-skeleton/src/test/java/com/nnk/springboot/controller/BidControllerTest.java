@@ -89,5 +89,14 @@ public class BidControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bidList/update/{id}"));
     }
+    @Test
+    public void deleteBidTest() throws Exception {
+        //WHEN
+        mockMvc.perform(get("/bidList/delete/1").with(csrf()))
+                //THEN
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/bidList/list"));
+    }
+
 
 }
