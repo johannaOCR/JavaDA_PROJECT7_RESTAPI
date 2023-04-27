@@ -64,7 +64,7 @@ public class BidControllerTest {
                 .andExpect(model().attributeExists("bidList"));
     }
     @Test
-    public void showUpdateForm() throws Exception {
+    public void showUpdateFormTest() throws Exception {
         //GIVEN
         BidList bidList = new BidList("account", "type", 10d);
         //WHEN
@@ -74,6 +74,20 @@ public class BidControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("bidList/update"))
                 .andExpect(model().attributeExists("bid"));
+    }
+
+    @Test
+    public void updateBidTest() throws Exception {
+        //GIVEN
+        BidList bidList = new BidList("account", "type", 10d);
+        //WHEN
+        mockMvc.perform(post("/bidList/update/1").with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(bidList.toString())
+                        .accept(MediaType.APPLICATION_JSON))
+                //THEN
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/bidList/update/{id}"));
     }
 
 }

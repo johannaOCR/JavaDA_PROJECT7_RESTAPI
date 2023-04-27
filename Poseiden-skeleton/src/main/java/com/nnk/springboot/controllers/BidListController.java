@@ -77,7 +77,7 @@ public class BidListController {
     }
 
     /**
-     * Valide et effectue les modifications demandé du formulaire
+     * Valide et effectue les modifications demandées du formulaire
      * @param id
      * @param bidList
      * @param result
@@ -86,9 +86,12 @@ public class BidListController {
      */
     @PostMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                             BindingResult result, Model model) {
-        bidListService.updateBidList(id,bidList);
-        return "redirect:/bidList/list";
+                            BindingResult result, Model model) {
+        if (!result.hasErrors()) {
+            bidListService.updateBidList(id,bidList);
+            return "redirect:/bidList/list";
+        }
+        return "redirect:/bidList/update/{id}";
     }
 
     /**
