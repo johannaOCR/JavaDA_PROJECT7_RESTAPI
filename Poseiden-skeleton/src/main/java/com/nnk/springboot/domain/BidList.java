@@ -20,8 +20,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "bidlist")
 public class BidList {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bidListId", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "BidListId", nullable = false)
     private Integer id;
     @NotNull
     @NotBlank(message = "Account is mandatory")

@@ -48,11 +48,10 @@ public class BidListController {
      * Valide les données du formulaire et enregistre si OK
      * @param bid
      * @param result
-     * @param model
      * @return
      */
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
+    public String validate(@Valid BidList bid, BindingResult result) {
         if (!result.hasErrors()) {
             bidListService.addBidList(bid);
             return "redirect:/bidList/list";
