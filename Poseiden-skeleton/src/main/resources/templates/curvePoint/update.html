@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	<meta charset="utf-8"/>
+	<title>Home</title>
+	<link rel="stylesheet" href="../../css/bootstrap.min.css" >
 </head>
 <body>
 <div class="container">
@@ -14,9 +14,14 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
-			 -->
+			<p>Curve Id</p>@
+			<input type="text" th:field="*{curveId}" th:name="curveId" class="form-control" placeholder="${curve.curveId}"/>
+			<p>Term</p>
+			<input type="text" th:field="*{term}" th:name="term" class="form-control" placeholder="${curve.term}"/>
+			<p>Value</p>
+			<input type="text" th:field="*{value}" th:name="value" class="form-control" placeholder="${curve.value}"/>
+			<input type="submit" value="Update data" class="btn btn-primary btn-sm"/>
+			<a href="/curvePoint/list" class="btn btn-primary btn-sm">Cancel</a>
 		</form>
 	</div>
 
