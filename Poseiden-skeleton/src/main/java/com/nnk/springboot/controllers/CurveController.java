@@ -27,12 +27,12 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/add")
-    public String addBidForm() {
+    public String addBidForm(CurvePoint bid) {
         return "curvePoint/add";
     }
 
     @PostMapping("/curvePoint/validate")
-    public String validate(@Valid CurvePoint curvePoint, BindingResult result) {
+    public String validate(@Valid CurvePoint curvePoint, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             curvePointService.addCurvePoint(curvePoint);
             return "redirect:/curvePoint/list";
@@ -51,8 +51,8 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/update/{id}")
-    public String updateBid(@PathVariable("id")  @Valid CurvePoint curvePoint,
-                            BindingResult result) {
+    public String updateBid(@PathVariable("id") Integer id, @Valid CurvePoint curvePoint,
+                            BindingResult result, Model model) {
         if (!result.hasErrors()) {
             curvePointService.updateCurvePoint(curvePoint);
             return "redirect:/curvePoint/list";
@@ -61,7 +61,7 @@ public class CurveController {
     }
 
     @GetMapping("/curvePoint/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id) {
+    public String deleteBid(@PathVariable("id") Integer id, Model model) {
         curvePointService.deleteCurvePoint(id);
         return "redirect:/curvePoint/list";
     }
