@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	<meta charset="utf-8"/>
+	<title>Home</title>
+	<link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
@@ -15,10 +15,14 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/curvePoint/validate}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of CurvePoint, there are 2 buttons: Save data and Cancel to the list CurvePoint
-			 -->
-
+			<p>Curve Id</p>
+			<input type="text" th:field="*{curveId}" th:name="curveId" class="form-control" placeholder="Curve Id"/>
+			<p>Term</p>
+			<input type="text" th:field="*{term}" th:name="term" class="form-control" placeholder="Term"/>
+			<p>Value</p>
+			<input type="text" th:field="*{value}" th:name="value" class="form-control" placeholder="Value"/>
+			<input type="submit" value="Save data" class="btn btn-primary btn-sm"/>
+			<a href="/curvePoint/list" class="btn btn-primary btn-sm">Cancel</a>
 		</form>
 	</div>
 
