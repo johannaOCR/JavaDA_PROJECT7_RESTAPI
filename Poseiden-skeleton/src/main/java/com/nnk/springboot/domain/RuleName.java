@@ -7,7 +7,6 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
