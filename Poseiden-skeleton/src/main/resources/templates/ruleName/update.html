@@ -15,10 +15,20 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/ruleName/update/{id}(id=${ruleName.id})}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of RuleName, there are 2 buttons: Update data and Cancel to the RuleName
-			 -->
-
+			<p>Rule Name</p>
+			<input type="text" th:field="*{name}" th:name="ruleName" class="form-control" placeholder="${ruleName.name}"/>
+			<p>Rule Description</p>
+			<input type="text" th:field="*{description}" th:name="description" class="form-control" placeholder="${ruleName.description}"/>
+			<p>Json</p>
+			<input type="file" th:field="*{json}" th:name="json" class="form-control" placeholder="${ruleName.json}"/>
+			<p>Template</p>
+			<input type="file" th:field="*{template}" th:name="template" class="form-control" placeholder="${ruleName.template}"/>
+			<p>Sql String</p>
+			<input type="text" th:field="*{sqlStr}" th:name="sqlString" class="form-control" placeholder="${ruleName.sqlString}"/>
+			<p>Sql Part</p>
+			<input type="text" th:field="*{sqlPart}" th:name="sqlPart" class="form-control" placeholder="${ruleName.sqlPart}"/>
+			<input type="submit" value="Update data" class="btn btn-primary btn-sm"/>
+			<a href="/ruleName/list" class="btn btn-primary btn-sm">Cancel</a>
 		</form>
 	</div>
 
