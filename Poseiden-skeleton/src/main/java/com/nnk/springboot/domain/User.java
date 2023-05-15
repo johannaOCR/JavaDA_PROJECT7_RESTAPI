@@ -38,6 +38,10 @@ public class User implements UserDetails {
         this.role = role;
     }
 
+    public User() {
+
+    }
+
     public Integer getId() {
         return id;
     }
