@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Home</title>
+<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+</head>
+<body>
+<div class="container">
+
+	<div class="row">
+		<h2>Add New Rating</h2>
+	</div>
+
+	<div class="row">
+		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
+			<p>Moodys' Rating</p>
+			<input type="text" th:field="*{moodysRating}" th:name="moodysRating" class="form-control" placeholder="Moodie's Rating"/>
+			<p>SandP's Rating</p>
+			<input type="text" th:field="*{sandPRating}" th:name="sandPRating" class="form-control" placeholder="SandP's Rating"/>
+			<p>Fitch's Rating</p>
+			<input type="text" th:field="*{fitchRating}" th:name="fitchsRating" class="form-control" placeholder="Fitch's Rating"/>
+			<p>Order Number</p>
+			<input type="text" th:field="*{orderNumber}" th:name="orderNumber" class="form-control" placeholder="Order Number"/>
+			<input type="submit" value="Save data" class="btn btn-primary btn-sm"/>
+			<a href="/rating/list" class="btn btn-primary btn-sm">Cancel</a>
+		</form>
+	</div>
+
+</div>
+</body>
+</html>
