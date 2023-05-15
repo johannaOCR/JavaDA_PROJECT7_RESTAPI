@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Trade {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @NotNull
     @NotBlank(message = "Account is mandatory")
