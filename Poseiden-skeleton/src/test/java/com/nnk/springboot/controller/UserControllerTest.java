@@ -2,6 +2,7 @@ package com.nnk.springboot.controller;
 import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.security.PasswordSecurity;
 import com.nnk.springboot.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,8 @@ public class UserControllerTest {
     private MockMvc mvc;
     @MockBean
     private UserService userService;
+    @MockBean
+    private PasswordSecurity passwordSecurity;
 
     @Test
     public void home() throws Exception {
@@ -51,6 +54,7 @@ public class UserControllerTest {
     @Test
     public void validate() throws Exception {
         //WHEN
+        when(passwordSecurity.isValid("password")).thenReturn(true);
         mvc.perform(post("/user/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("username=username&fullname=fullname&password=password&role=USER")
@@ -74,6 +78,7 @@ public class UserControllerTest {
     @Test
     public void updateUser() throws Exception {
         //WHEN
+        when(passwordSecurity.isValid("password")).thenReturn(true);
         mvc.perform(post("/user/update/1").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("username=username&fullname=fullname&password=password&role=USER")
