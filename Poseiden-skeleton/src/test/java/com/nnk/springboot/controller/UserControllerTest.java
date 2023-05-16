@@ -53,7 +53,7 @@ public class UserControllerTest {
         //WHEN
         mvc.perform(post("/user/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-                        .content("fullname=fullname&username=username&password=Password!123&role=USER")
+                        .content("fullname=fullname&username=username&password=Password?123&role=USER")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
                 //THEN
                 .andExpect(status().is3xxRedirection())
