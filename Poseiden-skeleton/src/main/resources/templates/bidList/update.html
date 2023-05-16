@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" 
 	  xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
-</head>
-<body>
-<div class="container">
-	<div class="row">
-		<h2>Update Bid</h2>
-	</div>
-
-	<div class="row">
-		<form action="#" th:action="@{/bidList/update/{id}(id=${bid.id})}" th:object="${bid}" method="post" class="form-horizontal" style="width: 100%">
-			<p>Account</p>
-			<input type="text" th:field="*{account}" th:name="account" class="form-control" placeholder="${bidList.account}">
-			<p>Type</p>
-			<input type="text" th:field="*{type}" th:name="type" class="form-control" placeholder="${bidList.type}">
-			<p>Bid Quantity</p>
-			<input type="text" th:field="*{bidQuantity}" th:name="bidQuantity" class="form-control" placeholder="${bidList.bidQuantity}">
-			<input type="submit" value="Update data" class="btn btn-primary btn-sm">
-			<a href="/bidList/list" class="btn btn-primary btn-sm">Cancel</a>
-		</form>
-	</div>
-
-</div>
-</body>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Home</title>
+		<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<h2>Update Bid</h2>
+			</div>
+			<div class="row">
+				<form action="#" th:action="@{/bidList/update/{id}(id=${bid.id})}" th:object="${bid}" method="post" class="form-horizontal" style="width: 100%">
+					<p>Account</p>
+					<input type="text" th:field="*{account}" th:name="account" class="form-control" placeholder="${bidList.account}">
+					<p>Type</p>
+					<input type="text" th:field="*{type}" th:name="type" class="form-control" placeholder="${bidList.type}">
+					<p>Bid Quantity</p>
+					<input type="text" th:field="*{bidQuantity}" th:name="bidQuantity" class="form-control" placeholder="${bidList.bidQuantity}">
+					<input type="submit" value="Update data" class="btn btn-primary btn-sm">
+					<a href="/bidList/list" class="btn btn-primary btn-sm">Cancel</a>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>

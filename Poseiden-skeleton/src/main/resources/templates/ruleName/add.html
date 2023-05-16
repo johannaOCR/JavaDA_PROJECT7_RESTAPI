@@ -17,16 +17,22 @@
 		<form action="#" th:action="@{/ruleName/validate}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
 			<p>Rule Name</p>
 			<input type="text" th:field="*{name}" th:name="name" class="form-control" placeholder="Rule Name"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="fieldError">name error</span>
 			<p>Rule Description</p>
 			<input type="text" th:field="*{description}" th:name="description" class="form-control" placeholder="Rule Description"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:errorclass="fieldError">description error</span>
 			<p>Json</p>
 			<input type="text" th:field="*{json}" th:name="json" class="form-control" placeholder="Json"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('json')}" th:errors="*{json}" th:errorclass="fieldError">description error</span>
 			<p>Template</p>
 			<input type="text" th:field="*{template}" th:name="template" class="form-control" placeholder="Template"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('template')}" th:errors="*{template}" th:errorclass="fieldError">template error</span>
 			<p>Sql String</p>
 			<input type="text" th:field="*{sqlStr}" th:name="sqlString" class="form-control" placeholder="Sql String"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('sqlStr')}" th:errors="*{sqlStr}" th:errorclass="fieldError">sqlStr error</span>
 			<p>Sql Part</p>
 			<input type="text" th:field="*{sqlPart}" th:name="sqlPart" class="form-control" placeholder="Sql Part"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('sqlPart')}" th:errors="*{sqlPart}" th:errorclass="fieldError">sqlPart error</span>
 			<input type="submit" value="Save data" class="btn btn-primary btn-sm"/>
 			<a href="/ruleName/list" class="btn btn-primary btn-sm">Cancel</a>
 		</form>

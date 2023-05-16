@@ -21,13 +21,16 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank(message = "moodysRating is mandatory")
     private String moodysRating;
 
+    @NotBlank(message = "sandPRating is mandatory")
     private String sandPRating;
 
+    @NotBlank(message = "fitchRating is mandatory")
     private String fitchRating;
 
-
+    @NotNull(message = "orderNumber is mandatory")
     private Integer orderNumber;
 
     public Rating() {

@@ -17,14 +17,18 @@
 		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
 			<p>Moodys' Rating</p>
 			<input type="text" th:field="*{moodysRating}" th:name="moodysRating" class="form-control" placeholder="Moodie's Rating"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}" th:errorclass="fieldError">moodysRating error</span>
 			<p>SandP's Rating</p>
 			<input type="text" th:field="*{sandPRating}" th:name="sandPRating" class="form-control" placeholder="SandP's Rating"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}" th:errorclass="fieldError">sandPRating error</span>
 			<p>Fitch's Rating</p>
 			<input type="text" th:field="*{fitchRating}" th:name="fitchsRating" class="form-control" placeholder="Fitch's Rating"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}" th:errorclass="fieldError">fitchRating error</span>
 			<p>Order Number</p>
 			<input type="text" th:field="*{orderNumber}" th:name="orderNumber" class="form-control" placeholder="Order Number"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}" th:errorclass="fieldError">orderNumber error</span>
 			<input type="submit" value="Save data" class="btn btn-primary btn-sm"/>
-			<a href="/rating/list" class="btn btn-primary btn-sm">Cancel</a>
+			<a href="/rating/list" class="btn btn-primary btn-danger btn-sm">Cancel</a>
 		</form>
 	</div>
 

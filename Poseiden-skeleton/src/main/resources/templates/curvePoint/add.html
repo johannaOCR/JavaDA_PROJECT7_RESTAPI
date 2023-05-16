@@ -17,12 +17,15 @@
 		<form action="#" th:action="@{/curvePoint/validate}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
 			<p>Curve Id</p>
 			<input type="text" th:field="*{curveId}" th:name="curveId" class="form-control" placeholder="Curve Id"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('curveId')}" th:errors="*{curveId}" th:errorclass="fieldError">curveId error</span>
 			<p>Term</p>
 			<input type="text" th:field="*{term}" th:name="term" class="form-control" placeholder="Term"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('term')}" th:errors="*{term}" th:errorclass="fieldError">term error</span>
 			<p>Value</p>
 			<input type="text" th:field="*{value}" th:name="value" class="form-control" placeholder="Value"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}" th:errorclass="fieldError">value error</span>
 			<input type="submit" value="Save data" class="btn btn-primary btn-sm"/>
-			<a href="/curvePoint/list" class="btn btn-primary btn-sm">Cancel</a>
+			<a href="/curvePoint/list" class="btn btn-primary btn-sm btn-danger">Cancel</a>
 		</form>
 	</div>
 

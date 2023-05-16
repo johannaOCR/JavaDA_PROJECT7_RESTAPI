@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -23,12 +22,12 @@ public class BidListController {
 
     /**
      * Affiche la liste des bidlists enregistrées
+     *
      * @param model
      * @return
      */
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         List<BidList> bidList = bidListService.getAllBidList();
         model.addAttribute("bidList", bidList);
         return "bidList/list";
@@ -36,6 +35,7 @@ public class BidListController {
 
     /**
      * affiche le formulaire pour ajouter une Bidlist
+     *
      * @param bid
      * @return
      */
@@ -46,12 +46,13 @@ public class BidListController {
 
     /**
      * Valide les données du formulaire et enregistre si OK
+     *
      * @param bid
      * @param result
      * @return
      */
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result) {
+    public String validate(@Valid BidList bid, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             bidListService.addBidList(bid);
             return "redirect:/bidList/list";
@@ -61,6 +62,7 @@ public class BidListController {
 
     /**
      * Affiche le formulaire pour mettre à jour la Bidlist
+     *
      * @param id
      * @param model
      * @return
@@ -68,7 +70,7 @@ public class BidListController {
     @GetMapping("/bidList/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         BidList bid = bidListService.getBidListById(id);
-        if (bid!=null) {
+        if (bid != null) {
             model.addAttribute("bid", bid);
             return "bidList/update";
         }
@@ -77,6 +79,7 @@ public class BidListController {
 
     /**
      * Valide et effectue les modifications demandées du formulaire
+     *
      * @param id
      * @param bidList
      * @param result
@@ -87,7 +90,7 @@ public class BidListController {
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
                             BindingResult result, Model model) {
         if (!result.hasErrors()) {
-            bidListService.updateBidList(id,bidList);
+            bidListService.updateBidList(id, bidList);
             return "redirect:/bidList/list";
         }
         return "redirect:/bidList/update/{id}";
@@ -95,6 +98,7 @@ public class BidListController {
 
     /**
      * Supprime une bidList donnée
+     *
      * @param id
      * @param model
      * @return

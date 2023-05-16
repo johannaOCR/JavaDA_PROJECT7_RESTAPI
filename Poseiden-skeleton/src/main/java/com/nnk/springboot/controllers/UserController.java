@@ -2,8 +2,6 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 
-import com.nnk.springboot.repositories.UserRepository;
-import com.nnk.springboot.security.PasswordSecurity;
 import com.nnk.springboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,8 +19,6 @@ import javax.validation.Valid;
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private PasswordSecurity passwordSecurity;
 
     @RequestMapping("/user/list")
     public String home(Model model)
@@ -32,19 +28,16 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser(User bid) {
+    public String addUser(User user) {
         return "user/add";
     }
 
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
-            if(passwordSecurity.isValid(user.getPassword())) {
-                user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-                userService.addUser(user);
-                model.addAttribute("users", userService.getAllUsers());
-                return "redirect:/user/list";
-            }
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            userService.addUser(user);
+            return "redirect:/user/list";
         }
         return "user/add";
     }
@@ -52,7 +45,6 @@ public class UserController {
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         User user = userService.getUserById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        user.setPassword("");
         model.addAttribute("user", user);
         return "user/update";
     }
@@ -60,7 +52,7 @@ public class UserController {
     @PostMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid User user,
                              BindingResult result, Model model) {
-        if (!result.hasErrors() && passwordSecurity.isValid(user.getPassword())) {
+        if (!result.hasErrors()) {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             userService.updateUser(user);
             model.addAttribute("users", userService.getAllUsers());

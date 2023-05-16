@@ -1,9 +1,12 @@
 package com.nnk.springboot.domain;
 
+import com.nnk.springboot.security.PasswordConstraint;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
@@ -20,6 +23,7 @@ public class User implements UserDetails {
     private String username;
 
     @Column(name = "password")
+    @PasswordConstraint
     @NotBlank(message = "Password is mandatory")
     private String password;
 

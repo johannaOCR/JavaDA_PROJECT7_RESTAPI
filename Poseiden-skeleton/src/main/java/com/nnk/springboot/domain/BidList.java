@@ -23,14 +23,18 @@ public class BidList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BidListId", nullable = false)
     private Integer id;
+
     @NotNull
     @NotBlank(message = "Account is mandatory")
     private String account;
+
     @NotNull
     @NotBlank(message = "Type is mandatory")
     private String type;
+
     @Min(value = 0, message = "Bid quantity must be positive")
     private Double bidQuantity;
+
     private Double askQuantity;
     private Double bid;
     private Double ask;

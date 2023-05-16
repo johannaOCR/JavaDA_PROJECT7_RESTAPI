@@ -1,8 +1,6 @@
 package com.nnk.springboot.controller;
 import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.repositories.UserRepository;
-import com.nnk.springboot.security.PasswordSecurity;
 import com.nnk.springboot.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,8 +28,7 @@ public class UserControllerTest {
     private MockMvc mvc;
     @MockBean
     private UserService userService;
-    @MockBean
-    private PasswordSecurity passwordSecurity;
+
 
     @Test
     public void home() throws Exception {
@@ -54,15 +51,13 @@ public class UserControllerTest {
     @Test
     public void validate() throws Exception {
         //WHEN
-        when(passwordSecurity.isValid("password")).thenReturn(true);
         mvc.perform(post("/user/validate").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-                        .content("username=username&fullname=fullname&password=password&role=USER")
+                        .content("fullname=fullname&username=username&password=Password!123&role=USER")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
                 //THEN
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/user/list"));
-    }
+                .andExpect(view().name("redirect:/user/list")); }
     @Test
     public void showUpdateForm() throws Exception {
         //GIVEN
@@ -78,10 +73,9 @@ public class UserControllerTest {
     @Test
     public void updateUser() throws Exception {
         //WHEN
-        when(passwordSecurity.isValid("password")).thenReturn(true);
         mvc.perform(post("/user/update/1").with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-                        .content("username=username&fullname=fullname&password=password&role=USER")
+                        .content("username=username&fullname=fullname&password=Password!1&role=USER")
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
                 //THEN
                 .andExpect(status().is3xxRedirection())

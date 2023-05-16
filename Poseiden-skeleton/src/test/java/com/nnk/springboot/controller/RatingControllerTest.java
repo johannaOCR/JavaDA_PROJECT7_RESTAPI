@@ -1,6 +1,7 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.controllers.RatingController;
+import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.services.RatingService;
 import org.junit.Test;
@@ -52,9 +53,9 @@ public class RatingControllerTest {
     public void validate() throws Exception {
         //WHEN
         mvc.perform(post("/rating/validate").with(csrf())
-                        .accept(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
                         .content("moodysRating=test&sandPRating=test&fitchRating=test&orderNumber=1")
-                        .accept(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
+                        .accept(MediaType.APPLICATION_FORM_URLENCODED))
                 //THEN
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/rating/list"));
@@ -72,18 +73,17 @@ public class RatingControllerTest {
                 .andExpect(model().attributeExists("rating"));
     }
     @Test
-    public void updateRating() throws Exception {
+    public void updateRatingTest() throws Exception {
         //GIVEN
-        Rating rating = new Rating("moodysRating", "sandPRating", "fitchRating", 1);
+        Rating rating = new Rating("test","test","test",1);
         //WHEN
-        when(ratingService.getRatingById(1)).thenReturn(Optional.of(rating));
         mvc.perform(post("/rating/update/1").with(csrf())
-                        .accept(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-                        .content("moodysRating=test&sandPRating=test&fitchRating=test&orderNumber=1")
-                        .accept(MediaType.APPLICATION_FORM_URLENCODED))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(rating.toString())
+                        .accept(MediaType.APPLICATION_JSON))
                 //THEN
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/rating/list"));
+                .andExpect(view().name("redirect:/rating/update/{id}"));
     }
     @Test
     public void deleteRating() throws Exception {

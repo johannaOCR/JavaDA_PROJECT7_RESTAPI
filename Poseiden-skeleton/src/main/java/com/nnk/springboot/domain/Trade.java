@@ -6,6 +6,7 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -22,13 +23,18 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
     @NotNull
     @NotBlank(message = "Account is mandatory")
     private String account;
+
     @NotNull
     @NotBlank(message = "Type is mandatory")
     private String type;
+
+    @Min(value = 0, message = "buyQuantity must be positive")
     private Double buyQuantity;
+
     private Double sellQuantity;
     private Double buyPrice;
     private Double sellPrice;

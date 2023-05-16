@@ -27,6 +27,7 @@ public class CurvePoint {
 
 
     @Min(value = 1, message = "CurveId must be positive")
+    @NotNull(message = "must not be null")
     private Integer curveId;
     private Timestamp asOfDate;
 

@@ -22,14 +22,14 @@ public class UserRepositoryTest {
     @Test
     public void userTest() {
         //GIVEN
-        User user = new User("username", "password", "fullname", "role");
+        User user = new User("username", "Password!1", "fullname", "role");
 
         // Save
         User userSaved = userRepository.save(user);
         Assert.assertNotNull(userSaved.getId());
         Assert.assertEquals(userSaved.getUsername(),"username");
         Assert.assertEquals(userSaved.getFullname(),"fullname");
-        Assert.assertEquals(userSaved.getPassword(),"password");
+        Assert.assertEquals(userSaved.getPassword(),"Password!1");
         Assert.assertEquals(userSaved.getRole(),"role");
 
         // Update
