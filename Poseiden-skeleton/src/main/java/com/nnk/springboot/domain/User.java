@@ -3,10 +3,8 @@ package com.nnk.springboot.domain;
 import com.nnk.springboot.security.PasswordConstraint;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
@@ -58,6 +56,10 @@ public class User implements UserDetails {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return false;
@@ -76,10 +78,6 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     @Override

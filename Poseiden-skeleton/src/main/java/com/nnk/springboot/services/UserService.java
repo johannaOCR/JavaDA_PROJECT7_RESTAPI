@@ -1,4 +1,5 @@
 package com.nnk.springboot.services;
+
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -23,6 +23,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Methode permettant de recupérer le user qui se log au format UserDetail pour son traitement d'authentification
+     *
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User connectedUser = userRepository.findByUsername(username);
@@ -41,22 +48,22 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         logger.info("Adding user");
         userRepository.save(user);
     }
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         logger.info("Getting all users");
         return userRepository.findAll();
     }
 
-    public void updateUser(User user){
+    public void updateUser(User user) {
         logger.info("Updating user");
         userRepository.save(user);
     }
 
-    public void deleteUser(Integer id){
+    public void deleteUser(Integer id) {
         logger.info("Deleting user");
         userRepository.deleteById(id);
     }

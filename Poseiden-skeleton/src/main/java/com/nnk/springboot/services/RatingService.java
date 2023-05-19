@@ -17,21 +17,21 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
-    public List<Rating> getAllRating(){
+    public List<Rating> getAllRating() {
         return ratingRepository.findAll();
     }
 
-    public void addRating(Rating rating){
+    public void addRating(Rating rating) {
         logger.info("Adding rating");
         ratingRepository.save(rating);
     }
 
-    public void updateRating(Rating rating){
+    public void updateRating(Rating rating) {
         logger.info("Updating rating");
         ratingRepository.save(rating);
     }
 
-    public void deleteRating(Integer id){
+    public void deleteRating(Integer id) {
         logger.info("Deleting rating");
         ratingRepository.deleteById(id);
     }

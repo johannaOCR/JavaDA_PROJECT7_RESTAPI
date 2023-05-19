@@ -39,6 +39,7 @@ public class CurvePointControllerTest {
                 .andExpect(view().name("curvePoint/list"))
                 .andExpect(model().attributeExists("curvePointList"));
     }
+
     @Test
     public void addCurveForm() throws Exception {
         //WHEN
@@ -48,6 +49,7 @@ public class CurvePointControllerTest {
                 .andExpect(view().name("curvePoint/add"))
                 .andExpect(model().attributeExists("curvePoint"));
     }
+
     @Test
     public void validate() throws Exception {
         //WHEN
@@ -59,6 +61,7 @@ public class CurvePointControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/curvePoint/list"));
     }
+
     @Test
     public void showUpdateForm() throws Exception {
         //GIVEN
@@ -72,6 +75,7 @@ public class CurvePointControllerTest {
                 .andExpect(view().name("curvePoint/update"))
                 .andExpect(model().attributeExists("curvePoint"));
     }
+
     @Test
     public void updateCurve() throws Exception {
         //GIVEN
@@ -87,6 +91,7 @@ public class CurvePointControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/curvePoint/list"));
     }
+
     @Test
     public void deleteCurve() throws Exception {
         //GIVEN

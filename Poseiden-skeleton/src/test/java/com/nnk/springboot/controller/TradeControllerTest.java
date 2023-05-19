@@ -39,6 +39,7 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/list"))
                 .andExpect(model().attributeExists("trades"));
     }
+
     @Test
     public void addTradeForm() throws Exception {
         //WHEN
@@ -48,6 +49,7 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/add"))
                 .andExpect(model().attributeExists("trade"));
     }
+
     @Test
     public void validate() throws Exception {
         //WHEN
@@ -59,6 +61,7 @@ public class TradeControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/trade/list"));
     }
+
     @Test
     public void showUpdateForm() throws Exception {
         //GIVEN
@@ -71,6 +74,7 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/update"))
                 .andExpect(model().attributeExists("trade"));
     }
+
     @Test
     public void updateTrade() throws Exception {
         //GIVEN
@@ -85,6 +89,7 @@ public class TradeControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/trade/list"));
     }
+
     @Test
     public void deleteTrade() throws Exception {
         //GIVEN

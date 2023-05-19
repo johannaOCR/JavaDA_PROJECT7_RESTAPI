@@ -27,15 +27,15 @@ public class UserRepositoryTest {
         // Save
         User userSaved = userRepository.save(user);
         Assert.assertNotNull(userSaved.getId());
-        Assert.assertEquals(userSaved.getUsername(),"username");
-        Assert.assertEquals(userSaved.getFullname(),"fullname");
-        Assert.assertEquals(userSaved.getPassword(),"Password!1");
-        Assert.assertEquals(userSaved.getRole(),"role");
+        Assert.assertEquals(userSaved.getUsername(), "username");
+        Assert.assertEquals(userSaved.getFullname(), "fullname");
+        Assert.assertEquals(userSaved.getPassword(), "Password!1");
+        Assert.assertEquals(userSaved.getRole(), "role");
 
         // Update
         userSaved.setFullname("fullnameUpdated");
         User userUpdated = userRepository.save(userSaved);
-        Assert.assertEquals(userSaved.getFullname(),"fullnameUpdated");
+        Assert.assertEquals(userSaved.getFullname(), "fullnameUpdated");
 
         // Find
         List<User> listResult = userRepository.findAll();

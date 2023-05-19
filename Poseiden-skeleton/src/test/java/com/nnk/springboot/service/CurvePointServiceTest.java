@@ -16,10 +16,10 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class CurvePointServiceTest {
-    @InjectMocks
-    private CurvePointService curvePointService;
     @Mock
     CurvePointRepository curvePointRepository;
+    @InjectMocks
+    private CurvePointService curvePointService;
 
     @Test
     public void addCurvePointTest() {
@@ -28,8 +28,9 @@ public class CurvePointServiceTest {
         //WHEN
         curvePointService.addCurvePoint(curvePoint);
         //THEN
-        verify(curvePointRepository,times(1)).save(curvePoint);
+        verify(curvePointRepository, times(1)).save(curvePoint);
     }
+
     @Test
     public void updateCurvePointTest() {
         //GIVEN
@@ -39,8 +40,9 @@ public class CurvePointServiceTest {
         //WHEN
         curvePointService.updateCurvePoint(curvePoint);
         //THEN
-        verify(curvePointRepository,times(2)).save(curvePoint);
+        verify(curvePointRepository, times(2)).save(curvePoint);
     }
+
     @Test
     public void getByIdCurvePointTest() {
         //GIVEN
@@ -51,22 +53,24 @@ public class CurvePointServiceTest {
         when(curvePointRepository.findById(id)).thenReturn(Optional.of(curvePoint));
         CurvePoint result = curvePointService.getCurvePointById(id).get();
         //THEN
-        verify(curvePointRepository,times(1)).findById(id);
+        verify(curvePointRepository, times(1)).findById(id);
         assertThat(result.getId()).isEqualTo(id);
         assertThat(result.getCurveId()).isEqualTo(1);
         assertThat(result.getTerm()).isEqualTo(10d);
         assertThat(result.getValue()).isEqualTo(10d);
     }
+
     @Test
-    public void getAllCurvePointTest(){
+    public void getAllCurvePointTest() {
         //GIVEN
         CurvePoint curvePoint = new CurvePoint(1, 10d, 10d);
         curvePoint.setId(1);
         //WHEN
         curvePointService.getAllCurvePoint();
         //THEN
-        verify(curvePointRepository,times(1)).findAll();
+        verify(curvePointRepository, times(1)).findAll();
     }
+
     @Test
     public void deleteCurvePointTest() {
         //GIVEN
@@ -76,6 +80,6 @@ public class CurvePointServiceTest {
         //WHEN
         curvePointService.deleteCurvePoint(id);
         //THEN
-        verify(curvePointRepository,times(1)).deleteById(id);
+        verify(curvePointRepository, times(1)).deleteById(id);
     }
 }

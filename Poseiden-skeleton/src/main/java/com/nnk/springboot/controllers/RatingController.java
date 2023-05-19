@@ -19,17 +19,37 @@ public class RatingController {
     @Autowired
     private RatingService ratingService;
 
+    /**
+     * Affiche la liste des Rating
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("/rating/list")
     public String home(Model model) {
         model.addAttribute("ratings", ratingService.getAllRating());
         return "rating/list";
     }
 
+    /**
+     * Affiche le formulaire pour ajouter un Rating
+     *
+     * @param rating
+     * @return
+     */
     @GetMapping("/rating/add")
     public String addRatingForm(Rating rating) {
         return "rating/add";
     }
 
+    /**
+     * Valide les données du formulaire d'ajout de Rating et fait appel au RatingService pour la sauvegarde
+     *
+     * @param rating
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
         if (!result.hasErrors()) {
@@ -39,6 +59,13 @@ public class RatingController {
         return "rating/add";
     }
 
+    /**
+     * Affiche le formulaire de modification d'un Rating
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Optional<Rating> rating = ratingService.getRatingById(id);
@@ -50,6 +77,15 @@ public class RatingController {
         return "rating/list";
     }
 
+    /**
+     * Valide les données du formulaire de modification de Rating et fait appel au RatingService sauvegarder les modifications
+     *
+     * @param id
+     * @param rating
+     * @param result
+     * @param model
+     * @return
+     */
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
                                BindingResult result, Model model) {
@@ -60,6 +96,13 @@ public class RatingController {
         return "redirect:/rating/update/{id}";
     }
 
+    /**
+     * Supprime un Rating donné
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
         ratingService.deleteRating(id);

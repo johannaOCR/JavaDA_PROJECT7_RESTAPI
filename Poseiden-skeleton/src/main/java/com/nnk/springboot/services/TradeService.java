@@ -16,21 +16,21 @@ public class TradeService {
     @Autowired
     private TradeRepository tradeRepository;
 
-    public List<Trade> getAllTrade(){
+    public List<Trade> getAllTrade() {
         return tradeRepository.findAll();
     }
 
-    public void addTrade(Trade trade){
+    public void addTrade(Trade trade) {
         logger.info("Adding trade");
         tradeRepository.save(trade);
     }
 
-    public void updateTrade(Trade trade){
+    public void updateTrade(Trade trade) {
         logger.info("Updating trade");
         tradeRepository.save(trade);
     }
 
-    public void deleteTrade(Integer id){
+    public void deleteTrade(Integer id) {
         logger.info("Deleting trade");
         tradeRepository.deleteById(id);
     }

@@ -16,21 +16,21 @@ public class RuleNameService {
     @Autowired
     private RuleNameRepository ruleNameRepository;
 
-    public List<RuleName> getAllRuleName(){
+    public List<RuleName> getAllRuleName() {
         return ruleNameRepository.findAll();
     }
 
-    public void addRuleName(RuleName ruleName){
+    public void addRuleName(RuleName ruleName) {
         logger.info("Adding ruleName");
         ruleNameRepository.save(ruleName);
     }
 
-    public void updateRuleName(RuleName ruleName){
+    public void updateRuleName(RuleName ruleName) {
         logger.info("Updating ruleName");
         ruleNameRepository.save(ruleName);
     }
 
-    public void deleteRuleName(Integer id){
+    public void deleteRuleName(Integer id) {
         logger.info("Deleting ruleName");
         ruleNameRepository.deleteById(id);
     }

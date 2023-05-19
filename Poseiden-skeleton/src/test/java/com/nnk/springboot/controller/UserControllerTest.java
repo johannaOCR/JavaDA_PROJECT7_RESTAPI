@@ -1,4 +1,5 @@
 package com.nnk.springboot.controller;
+
 import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.services.UserService;
@@ -39,6 +40,7 @@ public class UserControllerTest {
                 .andExpect(view().name("user/list"))
                 .andExpect(model().attributeExists("users"));
     }
+
     @Test
     public void addUser() throws Exception {
         //WHEN
@@ -48,6 +50,7 @@ public class UserControllerTest {
                 .andExpect(view().name("user/add"))
                 .andExpect(model().attributeExists("user"));
     }
+
     @Test
     public void validate() throws Exception {
         //WHEN
@@ -57,7 +60,9 @@ public class UserControllerTest {
                         .accept(MediaType.APPLICATION_FORM_URLENCODED))
                 //THEN
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/user/list")); }
+                .andExpect(view().name("redirect:/user/list"));
+    }
+
     @Test
     public void showUpdateForm() throws Exception {
         //GIVEN
@@ -70,6 +75,7 @@ public class UserControllerTest {
                 .andExpect(view().name("user/update"))
                 .andExpect(model().attributeExists("user"));
     }
+
     @Test
     public void updateUser() throws Exception {
         //WHEN
@@ -81,6 +87,7 @@ public class UserControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/user/list"));
     }
+
     @Test
     public void deleteUser() throws Exception {
         //GIVEN

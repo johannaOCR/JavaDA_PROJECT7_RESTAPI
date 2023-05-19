@@ -6,12 +6,11 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Objects;
-import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -58,7 +57,7 @@ public class BidList {
     public BidList() {
     }
 
-    public BidList (String account, String type, Double bidQuantity){
+    public BidList(String account, String type, Double bidQuantity) {
         this.account = account;
         this.type = type;
         this.bidQuantity = bidQuantity;

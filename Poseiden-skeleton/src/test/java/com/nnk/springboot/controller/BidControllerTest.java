@@ -3,16 +3,15 @@ package com.nnk.springboot.controller;
 import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.services.BidListService;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -54,6 +53,7 @@ public class BidControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bidList/list"));
     }
+
     @Test
     public void homeTest() throws Exception {
         //WHEN
@@ -63,6 +63,7 @@ public class BidControllerTest {
                 .andExpect(view().name("bidList/list"))
                 .andExpect(model().attributeExists("bidList"));
     }
+
     @Test
     public void showUpdateFormTest() throws Exception {
         //GIVEN
@@ -89,6 +90,7 @@ public class BidControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/bidList/update/{id}"));
     }
+
     @Test
     public void deleteBidTest() throws Exception {
         //WHEN

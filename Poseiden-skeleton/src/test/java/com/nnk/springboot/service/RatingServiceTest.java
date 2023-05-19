@@ -14,10 +14,10 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class RatingServiceTest {
-    @InjectMocks
-    private RatingService ratingService;
     @Mock
     RatingRepository ratingRepository;
+    @InjectMocks
+    private RatingService ratingService;
 
     @Test
     public void testAddRating() {
@@ -27,8 +27,9 @@ public class RatingServiceTest {
         // WHEN
         ratingService.addRating(rating);
         // THEN
-        verify(ratingRepository,times(1)).save(rating);
+        verify(ratingRepository, times(1)).save(rating);
     }
+
     @Test
     public void testGetRatingById() {
         // GIVEN
@@ -39,20 +40,22 @@ public class RatingServiceTest {
         when(ratingRepository.findById(id)).thenReturn(java.util.Optional.of(rating));
         Rating result = ratingService.getRatingById(id).get();
         // THEN
-        verify(ratingRepository,times(1)).findById(id);
+        verify(ratingRepository, times(1)).findById(id);
         assertThat(result.getId()).isEqualTo(id);
         assertThat(result.getMoodysRating()).isEqualTo("Moodys Rating");
         assertThat(result.getSandPRating()).isEqualTo("Sand PRating");
         assertThat(result.getFitchRating()).isEqualTo("Fitch Rating");
         assertThat(result.getOrderNumber()).isEqualTo(10);
     }
+
     @Test
     public void testGetAllRating() {
         // WHEN
         ratingService.getAllRating();
         // THEN
-        verify(ratingRepository,times(1)).findAll();
+        verify(ratingRepository, times(1)).findAll();
     }
+
     @Test
     public void testUpdateRating() {
         // GIVEN
@@ -63,8 +66,9 @@ public class RatingServiceTest {
         // WHEN
         ratingService.updateRating(rating);
         // THEN
-        verify(ratingRepository,times(2)).save(rating);
+        verify(ratingRepository, times(2)).save(rating);
     }
+
     @Test
     public void testDeleteRating() {
         // GIVEN
@@ -74,7 +78,7 @@ public class RatingServiceTest {
         // WHEN
         ratingService.deleteRating(id);
         // THEN
-        verify(ratingRepository,times(1)).deleteById(id);
+        verify(ratingRepository, times(1)).deleteById(id);
     }
 
 }

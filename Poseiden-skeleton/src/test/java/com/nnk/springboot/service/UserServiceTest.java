@@ -16,10 +16,10 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class UserServiceTest {
-    @InjectMocks
-    private UserService userService;
     @Mock
     UserRepository userRepository;
+    @InjectMocks
+    private UserService userService;
 
     @Test
     public void testAddUser() {
@@ -28,8 +28,9 @@ public class UserServiceTest {
         //WHEN
         userService.addUser(user);
         //THEN
-        verify(userRepository,times(1)).save(user);
+        verify(userRepository, times(1)).save(user);
     }
+
     @Test
     public void testUpdateUser() {
         //GIVEN
@@ -39,8 +40,9 @@ public class UserServiceTest {
         //WHEN
         userService.updateUser(user);
         //THEN
-        verify(userRepository,times(2)).save(user);
+        verify(userRepository, times(2)).save(user);
     }
+
     @Test
     public void testGetUserByUserName() {
         //GIVEN
@@ -49,24 +51,26 @@ public class UserServiceTest {
         when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
         User result = userService.getUserByUsername(user.getUsername());
         //THEN
-        verify(userRepository,times(1)).findByUsername(user.getUsername());
+        verify(userRepository, times(1)).findByUsername(user.getUsername());
         assertThat(result.getUsername()).isEqualTo("username");
         assertThat(result.getPassword()).isEqualTo("password");
         assertThat(result.getFullname()).isEqualTo("fullname");
         assertThat(result.getRole()).isEqualTo("role");
     }
+
     @Test
-    public void testLoadUserByUsername(){
+    public void testLoadUserByUsername() {
         //GIVEN
         User user = new User("username", "password", "fullname", "role");
         //WHEN
         when(userRepository.findByUsername(user.getUsername())).thenReturn(user);
         UserDetails result = userService.loadUserByUsername(user.getUsername());
         //THEN
-        verify(userRepository,times(1)).findByUsername(user.getUsername());
+        verify(userRepository, times(1)).findByUsername(user.getUsername());
         assertThat(result.getUsername()).isEqualTo("username");
         assertThat(result.getPassword()).isEqualTo("password");
     }
+
     @Test
     public void testDeleteUser() {
         //GIVEN

@@ -16,9 +16,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -39,6 +39,7 @@ public class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/list"))
                 .andExpect(model().attributeExists("ruleNames"));
     }
+
     @Test
     public void addRuleNameForm() throws Exception {
         //WHEN
@@ -48,6 +49,7 @@ public class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/add"))
                 .andExpect(model().attributeExists("ruleName"));
     }
+
     @Test
     public void validate() throws Exception {
         //WHEN
@@ -59,6 +61,7 @@ public class RuleNameControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/ruleName/list"));
     }
+
     @Test
     public void showUpdateForm() throws Exception {
         //GIVEN
@@ -71,6 +74,7 @@ public class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/update"))
                 .andExpect(model().attributeExists("ruleName"));
     }
+
     @Test
     public void updateRuleName() throws Exception {
         //GIVEN
@@ -85,6 +89,7 @@ public class RuleNameControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/ruleName/list"));
     }
+
     @Test
     public void deleteRuleName() throws Exception {
         //WHEN

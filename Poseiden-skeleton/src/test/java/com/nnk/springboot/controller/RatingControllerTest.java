@@ -1,7 +1,6 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.controllers.RatingController;
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.services.RatingService;
 import org.junit.Test;
@@ -40,6 +39,7 @@ public class RatingControllerTest {
                 .andExpect(view().name("rating/list"))
                 .andExpect(model().attributeExists("ratings"));
     }
+
     @Test
     public void addRatingForm() throws Exception {
         //WHEN
@@ -49,6 +49,7 @@ public class RatingControllerTest {
                 .andExpect(view().name("rating/add"))
                 .andExpect(model().attributeExists("rating"));
     }
+
     @Test
     public void validate() throws Exception {
         //WHEN
@@ -60,6 +61,7 @@ public class RatingControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/rating/list"));
     }
+
     @Test
     public void showUpdateForm() throws Exception {
         //GIVEN
@@ -72,10 +74,11 @@ public class RatingControllerTest {
                 .andExpect(view().name("rating/update"))
                 .andExpect(model().attributeExists("rating"));
     }
+
     @Test
     public void updateRatingTest() throws Exception {
         //GIVEN
-        Rating rating = new Rating("test","test","test",1);
+        Rating rating = new Rating("test", "test", "test", 1);
         //WHEN
         mvc.perform(post("/rating/update/1").with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
@@ -85,6 +88,7 @@ public class RatingControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/rating/update/{id}"));
     }
+
     @Test
     public void deleteRating() throws Exception {
         //GIVEN

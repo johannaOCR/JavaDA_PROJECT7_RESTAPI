@@ -16,10 +16,10 @@ import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class RuleNameServiceTest {
-    @InjectMocks
-    private RuleNameService ruleNameService;
     @Mock
     RuleNameRepository ruleNameRepository;
+    @InjectMocks
+    private RuleNameService ruleNameService;
 
     @Test
     public void addRuleNameTest() {
@@ -29,8 +29,9 @@ public class RuleNameServiceTest {
         //WHEN
         ruleNameService.addRuleName(ruleName);
         //THEN
-        verify(ruleNameRepository,times(1)).save(ruleName);
+        verify(ruleNameRepository, times(1)).save(ruleName);
     }
+
     @Test
     public void updateRuleNameTest() {
         //GIVEN
@@ -39,15 +40,17 @@ public class RuleNameServiceTest {
         //WHEN
         ruleNameService.updateRuleName(ruleName);
         //THEN
-        verify(ruleNameRepository,times(1)).save(ruleName);
+        verify(ruleNameRepository, times(1)).save(ruleName);
     }
+
     @Test
     public void getAllRuleNameTest() {
         //WHEN
         ruleNameService.getAllRuleName();
         //THEN
-        verify(ruleNameRepository,times(1)).findAll();
+        verify(ruleNameRepository, times(1)).findAll();
     }
+
     @Test
     public void getRuleNameByIdTest() {
         //GIVEN
@@ -58,7 +61,7 @@ public class RuleNameServiceTest {
         when(ruleNameRepository.findById(id)).thenReturn(Optional.of(ruleName));
         RuleName result = ruleNameService.getRuleNameById(1).get();
         //THEN
-        verify(ruleNameRepository,times(1)).findById(1);
+        verify(ruleNameRepository, times(1)).findById(1);
         assertThat(result.getId()).isEqualTo(1);
         assertThat(result.getName()).isEqualTo("Rule Name");
         assertThat(result.getDescription()).isEqualTo("Description");
@@ -67,6 +70,7 @@ public class RuleNameServiceTest {
         assertThat(result.getSqlStr()).isEqualTo("SQL");
         assertThat(result.getSqlPart()).isEqualTo("SQL Part");
     }
+
     @Test
     public void deleteByIdRuleNameTest() {
         //GIVEN
@@ -75,6 +79,6 @@ public class RuleNameServiceTest {
         //WHEN
         ruleNameService.deleteRuleName(1);
         //THEN
-        verify(ruleNameRepository,times(1)).deleteById(1);
+        verify(ruleNameRepository, times(1)).deleteById(1);
     }
 }

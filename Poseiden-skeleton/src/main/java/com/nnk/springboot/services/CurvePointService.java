@@ -12,25 +12,25 @@ import java.util.Optional;
 
 @Service
 public class CurvePointService {
+    private static final Logger logger = LogManager.getLogger("CurvePointService");
     @Autowired
     private CurvePointRepository curvePointRepository;
-    private static final Logger logger = LogManager.getLogger("CurvePointService");
 
-    public List<CurvePoint> getAllCurvePoint(){
+    public List<CurvePoint> getAllCurvePoint() {
         return curvePointRepository.findAll();
     }
 
-    public void addCurvePoint(CurvePoint curvePoint){
+    public void addCurvePoint(CurvePoint curvePoint) {
         logger.info("Adding curvePoint");
         curvePointRepository.save(curvePoint);
     }
 
-    public void updateCurvePoint(CurvePoint curvePoint){
+    public void updateCurvePoint(CurvePoint curvePoint) {
         logger.info("Updating curvePoint");
         curvePointRepository.save(curvePoint);
     }
 
-    public void deleteCurvePoint(Integer id){
+    public void deleteCurvePoint(Integer id) {
         logger.info("Deleting curvePoint");
         curvePointRepository.deleteById(id);
     }

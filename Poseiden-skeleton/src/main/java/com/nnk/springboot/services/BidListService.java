@@ -2,7 +2,6 @@ package com.nnk.springboot.services;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
-import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +24,17 @@ public class BidListService {
         return bidLists;
     }
 
-    public BidList addBidList(BidList bid){
+    public BidList addBidList(BidList bid) {
         logger.info("Adding bidList");
         BidList bidList = bidListRepository.save(bid);
         return bidList;
     }
 
-    public boolean updateBidList(int id,BidList bidList){
+    public boolean updateBidList(int id, BidList bidList) {
         BidList bidListFind = getBidListById(id);
         bidList.setId(id);
 
-        if(bidListFind!=bidList){
+        if (bidListFind != bidList) {
             logger.info("Updating bidList");
             bidListRepository.save(bidList);
             return true;
@@ -44,8 +43,8 @@ public class BidListService {
         return false;
     }
 
-    public boolean deleteBidList(Integer id){
-        if(getBidListById(id)!=null){
+    public boolean deleteBidList(Integer id) {
+        if (getBidListById(id) != null) {
             bidListRepository.deleteById(id);
             logger.info("Deleting bidList");
             return true;
@@ -55,7 +54,7 @@ public class BidListService {
     }
 
     public BidList getBidListById(Integer id) {
-        if(bidListRepository.findById(id).isPresent()){
+        if (bidListRepository.findById(id).isPresent()) {
             logger.info("find by id processing");
             return bidListRepository.findById(id).get();
         }

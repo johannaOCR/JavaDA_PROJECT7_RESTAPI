@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class PoseiderSkletonApplicationTests {
     @Test
-    public void contextLoads(){
+    public void contextLoads() {
 
     }
 }
